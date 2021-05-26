@@ -2,7 +2,7 @@
 d3.csv("./assets/data/data.csv").then(function(data) {
     console.log(data);
 
-    /*define svg area dimensions
+    
     var svgWidth = 1000;
     var svgHeight = 600;
 
@@ -17,13 +17,19 @@ d3.csv("./assets/data/data.csv").then(function(data) {
     var height = svgHeight - margin.top - margin.bottom;
 
     var svg = d3
-        .select("scatter")
-        .append("svg")
-        .attr("width", svgWidth)
+        .select("#scatter")
+        .append("svg");
+    svg.attr("width", svgWidth)
         .attr("height", svgHeight);
+    var circle = svg.append("circle")
+        .attr("cx", 100)
+        .attr("cy", 50)
+        .attr("r", 30)
+        .attr("stroke", "black")
+        .attr("stroke-width", "5")
+        .attr("fill", "pink");
 
-
-    //append svg group
+    /*
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
@@ -48,18 +54,28 @@ d3.csv("./assets/data/data.csv").then(function(data) {
 
     */
 
-    //try appending an svg 
+    /*
     var svg = d3.select("#scatter").append("svg");
-    svg.attr("width", "50px").attr("height", "50px");
+    svg.attr("width", "300px").attr("height", "300px");
     
     
-    svg.append("circle")
-        .attr("cx", 10)
-        .attr("cy", 25)
-        .attr("r", 3)
+    var circle = svg.append("circle")
+        .attr("cx", 100)
+        .attr("cy", 50)
+        .attr("r", 30)
         .attr("stroke", "black")
         .attr("stroke-width", "5")
-        .attr("fill", "purple");
+        .attr("fill", "pink");
+    circle.append("text")
+        .attr("x", 100)
+        .attr("y", 50)
+        .attr("stroke", "black")
+        .attr("font-size", "5px")
+        .attr("font-family", "sans")
+        .text("b");
+    */
+    var povertyMeasures = data.map(d => d.poverty);
+    console.log(povertyMeasures);
 
 
 
