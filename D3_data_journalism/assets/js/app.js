@@ -21,6 +21,27 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         .append("svg");
     svg.attr("width", svgWidth)
         .attr("height", svgHeight);
+
+    var chartGroup = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    var xLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.poverty)])
+        .range([0,width]);
+    
+    var yLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.obesity)])
+        .range([0, height]);
+
+    //create axis funcitons
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    //add x-axis 
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(bottomAxis);
+    /*
     var circle = svg.append("circle")
         .attr("cx", 100)
         .attr("cy", 50)
@@ -28,6 +49,7 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         .attr("stroke", "black")
         .attr("stroke-width", "5")
         .attr("fill", "pink");
+    */
 
     /*
     var chartGroup = svg.append("g")
