@@ -10,12 +10,12 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         top: 20,
         right: 40,
         bottom: 80,
-        left:50
+        left:10
     };
 
     var width = svgWidth-margin.left -margin.right;
     var height = svgHeight - margin.top - margin.bottom;
-
+    console.log(width);
     var svg = d3
         .select("#scatter")
         .append("svg");
@@ -25,13 +25,19 @@ d3.csv("./assets/data/data.csv").then(function(data) {
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    //parse data/cast as numbers
+    data.forEach(function(thing) {
+        thing.obesity = parseFloat(thing.obesity);
+        thing.poverty = parseFloat(thing.poverty);
+    });
+    console.log(data.poverty);
     var xLinearScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.poverty)])
         .range([0,width]);
-    
+    console.log(d3.max(data, d => d.poverty));
     var yLinearScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.obesity)])
-        .range([0, height]);
+        .range([height, 0]);
 
     //create axis funcitons
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -98,7 +104,17 @@ d3.csv("./assets/data/data.csv").then(function(data) {
     */
     var povertyMeasures = data.map(d => d.poverty);
     console.log(povertyMeasures);
+    var obesityMeasures = data.map(d => d.obesity);
+    console.log(obesityMeasures);
 
+    var circles = svg.selectAll("circle");
+
+    circles.data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d){
+            return
+        })
 
 
 });
