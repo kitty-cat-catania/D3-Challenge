@@ -10,7 +10,7 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         top: 20,
         right: 40,
         bottom: 80,
-        left:20
+        left: 70
     };
 
     var width = svgWidth-margin.left -margin.right;
@@ -61,5 +61,22 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         .attr("r", "15")
         .attr("fill", "purple")
         .attr("opacity", "0.3");
+
+
+    //add axis labels
+    chartGroup.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("In Poverty (%)");
+
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0-margin.left + 40)
+        .attr("x", 0 - (height / 2))
+        //.attr("dy", "1em")
+        .attr("font-size", "16px")
+        .text("Obese (%)");
 
 });
