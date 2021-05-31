@@ -61,8 +61,6 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         .attr("r", "15")
         .attr("fill", "purple")
         .attr("opacity", "0.3");
-
-
     //add axis labels
     chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
@@ -79,4 +77,18 @@ d3.csv("./assets/data/data.csv").then(function(data) {
         .attr("font-size", "16px")
         .text("Obese (%)");
 
+    var toolTip = d3.tip()
+        .attr("class", "tooltip")
+        .html(function (d) {
+            return (`${d.abbr}`);
+        });
+
+    chartGroup.call(toolTip);
+
+    circlesGroup.on("mouseover", function(data) {
+        toolTip.show(data, this);
+    })
+        .on("mouseout", function(data, index) {
+            toolTip.hide(data);
+        });
 });
